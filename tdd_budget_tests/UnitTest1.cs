@@ -24,4 +24,21 @@ public class BudgetServiceTests
         var result = budgetService.Query(new DateTime(2023, 12, 1), new DateTime(2023, 12, 31));
         result.Should().Be(3100);
     }
+
+    [Test]
+    public void QueryPartialMonth()
+    {
+        _budgetRepo = Substitute.For<IBudgetRepo>();
+        _budgetRepo.GetAll().Returns(new List<Budget>()
+        {
+            new Budget
+            {
+                YearMonth = "202312",
+                Amount = 3100
+            }
+        });
+        var budgetService = new BudgetService(_budgetRepo);
+        var result = budgetService.Query(new DateTime(2023, 12, 1), new DateTime(2023, 12, 10));
+        result.Should().Be(1000);
+    }
 }
