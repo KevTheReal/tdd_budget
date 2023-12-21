@@ -21,11 +21,11 @@ public class BudgetService
     {
         var rawBudgets = budgets
             .Where(x => x.YearMonthDateTime >= ToFirstMonthDay(start) && x.YearMonthDateTime <= ToFirstMonthDay(end));
-        
+
         return rawBudgets.Sum(x => GetBudgetInMonth(start, end, x));
     }
 
-    private DateTime ToFirstMonthDay(DateTime dateTime)
+    private static DateTime ToFirstMonthDay(DateTime dateTime)
     {
         return new DateTime(dateTime.Year, dateTime.Month, 1);
     }
@@ -34,15 +34,12 @@ public class BudgetService
     {
         var mStartDay = start;
         var mEndDay = end;
-        while (!(mStartDay.Month == x.YearMonthDateTime.Month && mStartDay.Year == x.YearMonthDateTime.Year))
-        {
-            mStartDay = mStartDay.AddDays(1);
-        }
-        while (!(mEndDay.Month == x.YearMonthDateTime.Month && mEndDay.Year == x.YearMonthDateTime.Year))
-        {
-            mEndDay = mEndDay.AddDays(-1);
-        }
-        return x.Amount/DateTime
+
+        mStartDay = start.AddDays(Math.Max((x.YearMonthDateTime - start).Days, 0));
+        mEndDay = end.AddDays(-Math.Max((end - ToFirstMonthDay(x.YearMonthDateTime.AddMonths(1)).AddDays(-1)).Days, 0));
+
+
+        return x.Amount / DateTime
             .DaysInMonth(x.YearMonthDateTime.Year, x.YearMonthDateTime.Month) * ((mEndDay - mStartDay).Days + 1);
     }
 }
