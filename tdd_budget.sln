@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tdd_budget", "tdd_budget\tdd_budget.csproj", "{DE4021C9-A987-4076-A8EE-6720D20DC5D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tdd_budget_tests", "tdd_budget_tests\tdd_budget_tests.csproj", "{E255B649-5C0C-4047-9B1F-5D3736117AD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{DE4021C9-A987-4076-A8EE-6720D20DC5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE4021C9-A987-4076-A8EE-6720D20DC5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE4021C9-A987-4076-A8EE-6720D20DC5D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E255B649-5C0C-4047-9B1F-5D3736117AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E255B649-5C0C-4047-9B1F-5D3736117AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E255B649-5C0C-4047-9B1F-5D3736117AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E255B649-5C0C-4047-9B1F-5D3736117AD5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
