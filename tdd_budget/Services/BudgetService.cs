@@ -34,11 +34,10 @@ public class BudgetService
     {
         var mStartDay = start;
         var mEndDay = end;
-        while (mStartDay.Month != x.YearMonthDateTime.Month)
+        while (mStartDay.Month != x.YearMonthDateTime.Month || mStartDay.Year != x.YearMonthDateTime.Year)
         {
             mStartDay = mStartDay.AddDays(1);
         }
-        while (mEndDay.Month != x.YearMonthDateTime.Month)
         {
             mEndDay = mEndDay.AddDays(-1);
         }
