@@ -32,18 +32,18 @@ public class BudgetService
 
     private static int GetBudgetInMonth(DateTime start, DateTime end, Budget x)
     {
-        var _start = start;
-        var _end = end;
-        while (_start.Month != x.YearMonthDateTime.Month)
+        var mStartDay = start;
+        var mEndDay = end;
+        while (mStartDay.Month != x.YearMonthDateTime.Month)
         {
-            _start = _start.AddDays(1);
+            mStartDay = mStartDay.AddDays(1);
         }
-        while (_end.Month != x.YearMonthDateTime.Month)
+        while (mEndDay.Month != x.YearMonthDateTime.Month)
         {
-            _end = _end.AddDays(-1);
+            mEndDay = mEndDay.AddDays(-1);
         }
         return x.Amount/DateTime
-            .DaysInMonth(x.YearMonthDateTime.Year, x.YearMonthDateTime.Month) * ((_end - _start).Days + 1);
+            .DaysInMonth(x.YearMonthDateTime.Year, x.YearMonthDateTime.Month) * ((mEndDay - mStartDay).Days + 1);
     }
 }
 

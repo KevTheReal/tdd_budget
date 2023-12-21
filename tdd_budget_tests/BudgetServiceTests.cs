@@ -85,6 +85,26 @@ public class BudgetServiceTests
         var result = _budgetService.Query(new DateTime(2023, 11, 30), new DateTime(2023, 12, 2));
         result.Should().Be(400);
     }
+    
+    [Test]
+    public void QueryInvalidPeriod()
+    {
+        GivenBudgets(new List<Budget>()
+        {
+            new()
+            {
+                YearMonth = "202311",
+                Amount = 6000
+            },
+            new()
+            {
+                YearMonth = "202312",
+                Amount = 3100
+            }
+        });
+        var result = _budgetService.Query(new DateTime(2023, 12, 2), new DateTime(2023, 11, 30));
+        result.Should().Be(0);
+    }
 
     private void GivenBudgets(List<Budget> budgets)
     {
