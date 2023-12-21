@@ -20,10 +20,30 @@ public class BudgetService
     private decimal GetTotalBudget(List<Budget> budgets, DateTime start, DateTime end)
     {
         var rawBudgets = budgets
-            .Where(x => x.YearMonthDateTime >= start && x.YearMonthDateTime <= end);
-        var days = (end - start).Days + 1;
-        var daysInMonth = DateTime.DaysInMonth(2023, 12);
-        return rawBudgets.Sum(x => x.Amount/daysInMonth * days);
+            .Where(x => x.YearMonthDateTime >= ToFirstMonthDay(start) && x.YearMonthDateTime <= ToFirstMonthDay(end));
+        
+        return rawBudgets.Sum(x => GetBudgetInMonth(start, end, x));
+    }
+
+    private DateTime ToFirstMonthDay(DateTime dateTime)
+    {
+        return new DateTime(dateTime.Year, dateTime.Month, 1);
+    }
+
+    private static int GetBudgetInMonth(DateTime start, DateTime end, Budget x)
+    {
+        var _start = start;
+        var _end = end;
+        while (_start.Month != x.YearMonthDateTime.Month)
+        {
+            _start = _start.AddDays(1);
+        }
+        while (_end.Month != x.YearMonthDateTime.Month)
+        {
+            _end = _end.AddDays(-1);
+        }
+        return x.Amount/DateTime
+            .DaysInMonth(x.YearMonthDateTime.Year, x.YearMonthDateTime.Month) * ((_end - _start).Days + 1);
     }
 }
 
